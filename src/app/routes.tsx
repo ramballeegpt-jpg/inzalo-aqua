@@ -9,22 +9,27 @@ import { DeviceManagement } from "./components/DeviceManagement";
 import { Schematic } from "./components/Schematic";
 import { Layout } from "./components/Layout";
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      path: "/login",
+      Component: Login,
+    },
+    {
+      path: "/",
+      Component: Layout,
+      children: [
+        { index: true, Component: Dashboard },
+        { path: "schematic", Component: Schematic },
+        { path: "leaks", Component: LeakAlerts },
+        { path: "meters", Component: MeterReadings },
+        { path: "valves", Component: ValveControl },
+        { path: "reports", Component: Reports },
+        { path: "devices", Component: DeviceManagement },
+      ],
+    },
+  ],
   {
-    path: "/login",
-    Component: Login,
-  },
-  {
-    path: "/",
-    Component: Layout,
-    children: [
-      { index: true, Component: Dashboard },
-      { path: "schematic", Component: Schematic },
-      { path: "leaks", Component: LeakAlerts },
-      { path: "meters", Component: MeterReadings },
-      { path: "valves", Component: ValveControl },
-      { path: "reports", Component: Reports },
-      { path: "devices", Component: DeviceManagement },
-    ],
-  },
-]);
+    basename: "/inzalo-aqua",
+  }
+);
